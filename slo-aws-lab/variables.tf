@@ -35,3 +35,15 @@ variable "container_port" {
   type        = number
   default     = 80
 }
+
+variable "ecs_min_capacity" {
+  type        = number
+  default     = 2
+  description = "Minimum number of ECS tasks"
+}
+
+variable "ecs_max_capacity" {
+  type        = number
+  default     = 5
+  description = "Maximum number of ECS tasks"
+}
