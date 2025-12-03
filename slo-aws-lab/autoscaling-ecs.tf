@@ -16,7 +16,7 @@ resource "aws_appautoscaling_policy" "ecs_nginx_cpu_policy" {
   resource_id        = aws_appautoscaling_target.ecs_nginx.resource_id
 
   target_tracking_scaling_policy_configuration {
-    target_value = 2  # ціль: ~2% середнє завантаження CPU для тесту
+    target_value = 5  # ціль: ~5% середнє завантаження CPU для тесту
 
     predefined_metric_specification {
       predefined_metric_type = "ECSServiceAverageCPUUtilization"
