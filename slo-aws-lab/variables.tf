@@ -44,6 +44,18 @@ variable "ecs_min_capacity" {
 
 variable "ecs_max_capacity" {
   type        = number
-  default     = 5
+  default     = 2
   description = "Maximum number of ECS tasks"
+}
+
+variable "monitoring_instance_type" {
+  type        = string
+  default     = "t3.micro"
+  description = "Instance type for monitoring EC2"
+}
+
+variable "monitoring_disk_size" {
+  type        = number
+  default     = 30
+  description = "Root disk size for monitoring EC2 (GiB)"
 }

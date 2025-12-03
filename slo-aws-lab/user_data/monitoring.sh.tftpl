@@ -1,0 +1,40 @@
+#!/bin/bash
+set -xe
+
+yum update -y
+
+amazon-linux-extras install docker -y || yum install -y docker
+
+systemctl enable docker
+systemctl start docker
+
+sleep 10
+
+docker pull prom/prometheus:latest
+docker pull grafana/grafana-oss:latest
+
+mkdir -p /etc/prometheus
+
+cat <<EOF >/etc/prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+EOF
+
+docker run -d \
+  --name prometheus \
+  -p 9090:9090 \
+  --restart unless-stopped \
+  -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
+  prom/prometheus:latest \
+  --config.file=/etc/prometheus/prometheus.yml
+
+docker run -d \
+  --name grafana \
+  -p 3000:3000 \
+  --restart unless-stopped \
+  grafana/grafana-oss:latest

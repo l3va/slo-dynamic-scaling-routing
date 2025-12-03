@@ -1,0 +1,53 @@
+{
+  "id": null,
+  "uid": "prom-simple",
+  "title": "Prometheus Simple Self-Monitoring",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "UP metric (targets state)",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "up",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        }
+      ],
+      "id": 1,
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 0 }
+    },
+    {
+      "type": "graph",
+      "title": "Prometheus memory usage (RSS)",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes",
+          "legendFormat": "RSS",
+          "refId": "A"
+        }
+      ],
+      "id": 2,
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 7 }
+    },
+    {
+      "type": "graph",
+      "title": "Prometheus CPU seconds",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "rate(process_cpu_seconds_total[1m])",
+          "legendFormat": "CPU",
+          "refId": "A"
+        }
+      ],
+      "id": 3,
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 14 }
+    }
+  ]
+}
