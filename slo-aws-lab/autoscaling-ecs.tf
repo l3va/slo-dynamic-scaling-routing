@@ -4,7 +4,6 @@ resource "aws_appautoscaling_target" "ecs_nginx" {
   service_namespace  = "ecs"
   scalable_dimension = "ecs:service:DesiredCount"
 
-  # Формат: service/<clusterName>/<serviceName>
   resource_id = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.nginx.name}"
 }
 
@@ -16,14 +15,14 @@ resource "aws_appautoscaling_policy" "ecs_nginx_cpu_policy" {
   resource_id        = aws_appautoscaling_target.ecs_nginx.resource_id
 
   target_tracking_scaling_policy_configuration {
-    target_value = 5  # ціль: ~5% середнє завантаження CPU для тесту
+    target_value = 5  
 
     predefined_metric_specification {
       predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
 
-    scale_in_cooldown  = 60  # сек, зачекай перед зменшенням
-    scale_out_cooldown = 60  # сек, зачекай перед збільшенням
+    scale_in_cooldown  = 60  
+    scale_out_cooldown = 60  
   }
 
   depends_on = [

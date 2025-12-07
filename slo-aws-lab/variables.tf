@@ -26,26 +26,22 @@ variable "public_subnet_cidrs" {
   default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
-variable "ecs_desired_count" {
-  type        = number
-  default     = 2
-}
-
 variable "container_port" {
   type        = number
   default     = 80
 }
 
+variable "ecs_desired_count" {
+  type        = number
+  default     = 2
+}
 variable "ecs_min_capacity" {
   type        = number
   default     = 2
-  description = "Minimum number of ECS tasks"
 }
-
 variable "ecs_max_capacity" {
   type        = number
-  default     = 2
-  description = "Maximum number of ECS tasks"
+  default     = 6
 }
 
 variable "monitoring_instance_type" {

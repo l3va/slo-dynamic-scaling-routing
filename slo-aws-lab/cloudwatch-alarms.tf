@@ -4,7 +4,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_latency_high" {
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
   datapoints_to_alarm = 2
-  threshold           = 0.002 # 0.3 секунди (300 ms)
+  threshold           = 0.04
 
   metric_name = "TargetResponseTime"
   namespace   = "AWS/ApplicationELB"
@@ -17,7 +17,6 @@ resource "aws_cloudwatch_metric_alarm" "alb_latency_high" {
 
   treat_missing_data = "notBreaching"
 
-  # поки без SNS, просто створимо alarm у статусі ALARM/OK
   alarm_actions = []
   ok_actions    = []
 
